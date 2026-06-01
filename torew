@@ -1,8 +1,5 @@
--- =====================================================
--- SWILL RIVALS HUB - ADMIN EDITION
--- Open: RIGHT SHIFT | Unlimited Access (No Trial)
--- Premium Design | All Cheats Included
--- =====================================================
+-- SWILL RIVALS HUB - ADMIN EDITION (No Admin Tab)
+-- Open: RIGHT SHIFT | Unlimited Access | Premium Design
 
 local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
@@ -16,11 +13,6 @@ local Lighting = game:GetService("Lighting")
 
 local GROUP_LINK = "https://roblox.com.ug/communities/9331768180/"
 
--- ========== ADMIN MODE - NO TRIAL ==========
-local adminMode = true  -- Unlimited access
-local menuVisible = false
-
--- Copy function
 local function copyLink()
     if setclipboard then pcall(setclipboard, GROUP_LINK)
     elseif toclipboard then pcall(toclipboard, GROUP_LINK)
@@ -28,18 +20,16 @@ local function copyLink()
     end
 end
 
--- ========== CREATE GUI ==========
+-- GUI
 local screenGui = Instance.new("ScreenGui")
 screenGui.Name = "SWILL_Admin"
 screenGui.ResetOnSpawn = false
 screenGui.Parent = CoreGui
 
--- Blur background effect
 local blur = Instance.new("BlurEffect")
 blur.Size = 0
 blur.Parent = Lighting
 
--- Main Menu Frame (Glassmorphism)
 local mainFrame = Instance.new("Frame")
 mainFrame.Size = UDim2.new(0, 520, 0, 480)
 mainFrame.Position = UDim2.new(0.5, -260, 0.5, -240)
@@ -51,7 +41,6 @@ mainFrame.Parent = screenGui
 mainFrame.Active = true
 mainFrame.Draggable = true
 
--- Outer glow
 local glow = Instance.new("Frame")
 glow.Size = UDim2.new(1, 10, 1, 10)
 glow.Position = UDim2.new(0, -5, 0, -5)
@@ -62,7 +51,6 @@ glow.Parent = mainFrame
 local glowCorner = Instance.new("UICorner", glow)
 glowCorner.CornerRadius = UDim.new(0, 16)
 
--- Main container
 local container = Instance.new("Frame")
 container.Size = UDim2.new(1, 0, 1, 0)
 container.BackgroundColor3 = Color3.fromRGB(18, 18, 35)
@@ -73,7 +61,6 @@ container.Parent = mainFrame
 local containerCorner = Instance.new("UICorner", container)
 containerCorner.CornerRadius = UDim.new(0, 14)
 
--- Inner glass effect
 local glass = Instance.new("Frame")
 glass.Size = UDim2.new(1, 0, 1, 0)
 glass.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
@@ -83,7 +70,6 @@ glass.Parent = container
 local glassCorner = Instance.new("UICorner", glass)
 glassCorner.CornerRadius = UDim.new(0, 14)
 
--- Title Bar with Gradient
 local titleBar = Instance.new("Frame")
 titleBar.Size = UDim2.new(1, 0, 0, 55)
 titleBar.BackgroundColor3 = Color3.fromRGB(30, 30, 55)
@@ -111,24 +97,6 @@ titleText.TextXAlignment = Enum.TextXAlignment.Left
 titleText.TextYAlignment = Enum.TextYAlignment.Center
 titleText.Parent = titleBar
 
--- Admin Badge
-local adminBadge = Instance.new("Frame")
-adminBadge.Size = UDim2.new(0, 80, 0, 28)
-adminBadge.Position = UDim2.new(1, -170, 0, 13)
-adminBadge.BackgroundColor3 = Color3.fromRGB(255, 80, 120)
-adminBadge.BackgroundTransparency = 0
-adminBadge.BorderSizePixel = 0
-adminBadge.Parent = titleBar
-local badgeCorner = Instance.new("UICorner", adminBadge)
-badgeCorner.CornerRadius = UDim.new(0, 14)
-local badgeText = Instance.new("TextLabel", adminBadge)
-badgeText.Size = UDim2.new(1, 0, 1, 0)
-badgeText.Text = "✦ ADMIN ✦"
-badgeText.TextColor3 = Color3.fromRGB(255, 255, 255)
-badgeText.TextSize = 12
-badgeText.Font = Enum.Font.GothamBold
-
--- Close Button
 local closeBtn = Instance.new("TextButton")
 closeBtn.Size = UDim2.new(0, 36, 0, 36)
 closeBtn.Position = UDim2.new(1, -48, 0, 9)
@@ -142,11 +110,10 @@ closeBtn.Parent = titleBar
 local closeCorner = Instance.new("UICorner", closeBtn)
 closeCorner.CornerRadius = UDim.new(0, 8)
 closeBtn.MouseButton1Click:Connect(function()
-    menuVisible = false
     mainFrame.Visible = false
+    TweenService:Create(blur, TweenInfo.new(0.3), {Size = 0}):Play()
 end)
 
--- Tab Bar
 local tabBar = Instance.new("Frame")
 tabBar.Size = UDim2.new(1, 0, 0, 48)
 tabBar.Position = UDim2.new(0, 0, 0, 55)
@@ -161,15 +128,14 @@ contentArea.Position = UDim2.new(0, 15, 0, 103)
 contentArea.BackgroundTransparency = 1
 contentArea.Parent = container
 
--- Tabs
-local tabs = {"CHEATS", "SETTINGS", "PROFILE", "ADMIN"}
+local tabs = {"CHEATS", "SETTINGS", "PROFILE"}
 local tabBtns = {}
 local tabPages = {}
 
 for i, tabName in ipairs(tabs) do
     local btn = Instance.new("TextButton")
-    btn.Size = UDim2.new(0, 100, 1, 0)
-    btn.Position = UDim2.new(0, (i-1)*100, 0, 0)
+    btn.Size = UDim2.new(0, 120, 1, 0)
+    btn.Position = UDim2.new(0, (i-1)*120, 0, 0)
     btn.BackgroundTransparency = 1
     btn.Text = tabName
     btn.TextColor3 = Color3.fromRGB(170, 170, 220)
@@ -206,7 +172,6 @@ for name, btn in pairs(tabBtns) do
     btn.MouseButton1Click:Connect(function() selectTab(name) end)
 end
 
--- ========== TOGGLE COMPONENT ==========
 local function createToggle(parent, text, yPos, callback)
     local frame = Instance.new("Frame")
     frame.Size = UDim2.new(1, -20, 0, 50)
@@ -254,8 +219,8 @@ local function createToggle(parent, text, yPos, callback)
         state = newState
         local targetColor = state and Color3.fromRGB(255, 80, 120) or Color3.fromRGB(60, 60, 95)
         local targetPos = state and UDim2.new(1, -29, 0, 3) or UDim2.new(0, 3, 0, 3)
-        TweenService:Create(toggleBtn, TweenInfo.new(0.15, Enum.EasingStyle.Quad), {BackgroundColor3 = targetColor}):Play()
-        TweenService:Create(toggleCircle, TweenInfo.new(0.15, Enum.EasingStyle.Quad), {Position = targetPos}):Play()
+        TweenService:Create(toggleBtn, TweenInfo.new(0.15), {BackgroundColor3 = targetColor}):Play()
+        TweenService:Create(toggleCircle, TweenInfo.new(0.15), {Position = targetPos}):Play()
         callback(state)
     end
     
@@ -264,11 +229,9 @@ local function createToggle(parent, text, yPos, callback)
             setState(not state)
         end
     end)
-    
-    return setState
 end
 
--- ========== AIMBOT ==========
+-- Aimbot
 local aimbotOn = false
 local aimbotConn = nil
 local function findClosest()
@@ -286,7 +249,7 @@ local function findClosest()
     return closest
 end
 
--- ========== CHEATS PAGE ==========
+-- CHEATS PAGE
 local cheatsPage = tabPages["CHEATS"]
 local cy = 0
 
@@ -298,8 +261,7 @@ createToggle(cheatsPage, "AIMBOT", cy, function(s)
             if aimbotOn then
                 local t = findClosest()
                 if t and t.Character then
-                    local newCF = CFrame.new(Camera.CFrame.Position, t.Character.Head.Position)
-                    Camera.CFrame = Camera.CFrame:Lerp(newCF, 0.85)
+                    Camera.CFrame = Camera.CFrame:Lerp(CFrame.new(Camera.CFrame.Position, t.Character.Head.Position), 0.85)
                 end
             end
         end)
@@ -369,7 +331,7 @@ cy = cy + 58
 
 cheatsPage.CanvasSize = UDim2.new(0, 0, 0, cy + 40)
 
--- ========== SETTINGS PAGE ==========
+-- SETTINGS PAGE
 local settingsPage = tabPages["SETTINGS"]
 local sy = 0
 createToggle(settingsPage, "VISIBLE CHECK (RAYCAST)", sy, function() end)
@@ -377,7 +339,7 @@ sy = sy + 58
 createToggle(settingsPage, "MOVEMENT PREDICTION", sy, function() end)
 settingsPage.CanvasSize = UDim2.new(0, 0, 0, 120)
 
--- ========== PROFILE PAGE ==========
+-- PROFILE PAGE
 local profilePage = tabPages["PROFILE"]
 
 local avatar = Instance.new("Frame")
@@ -436,7 +398,7 @@ local function updateStats()
             if n:find("death") then d = v.Value end
         end
         local kd = d > 0 and string.format("%.2f", k/d) or k
-        statsText.Text = "⚔️ KILLS: " .. k .. "\n💀 DEATHS: " .. d .. "\n📊 K/D RATIO: " .. kd
+        statsText.Text = "KILLS: " .. k .. "\nDEATHS: " .. d .. "\nK/D: " .. kd
     end
 end
 updateStats()
@@ -444,99 +406,12 @@ spawn(function() while wait(3) do updateStats() end end)
 
 profilePage.CanvasSize = UDim2.new(0, 0, 0, 280)
 
--- ========== ADMIN PAGE (UNLIMITED) ==========
-local adminPage = tabPages["ADMIN"]
-
-local adminCard = Instance.new("Frame")
-adminCard.Size = UDim2.new(1, -40, 0, 180)
-adminCard.Position = UDim2.new(0, 20, 0, 20)
-adminCard.BackgroundColor3 = Color3.fromRGB(255, 80, 120)
-adminCard.BackgroundTransparency = 0.85
-adminCard.BorderSizePixel = 2
-adminCard.BorderColor3 = Color3.fromRGB(255, 80, 120)
-adminCard.Parent = adminPage
-local adminCardCorner = Instance.new("UICorner", adminCard)
-adminCardCorner.CornerRadius = UDim.new(0, 12)
-
-local crownIcon = Instance.new("TextLabel", adminCard)
-crownIcon.Size = UDim2.new(0, 60, 0, 60)
-crownIcon.Position = UDim2.new(0.5, -30, 0, 20)
-crownIcon.Text = "👑"
-crownIcon.TextSize = 48
-crownIcon.TextColor3 = Color3.fromRGB(255, 200, 0)
-crownIcon.BackgroundTransparency = 1
-
-local adminTitle = Instance.new("TextLabel", adminCard)
-adminTitle.Size = UDim2.new(1, 0, 0, 30)
-adminTitle.Position = UDim2.new(0, 0, 0, 85)
-adminTitle.Text = "UNLIMITED ACCESS"
-adminTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
-adminTitle.TextSize = 20
-adminTitle.Font = Enum.Font.GothamBold
-
-local adminSub = Instance.new("TextLabel", adminCard)
-adminSub.Size = UDim2.new(1, 0, 0, 25)
-adminSub.Position = UDim2.new(0, 0, 0, 115)
-adminSub.Text = "No trial limits - Full features"
-adminSub.TextColor3 = Color3.fromRGB(200, 200, 255)
-adminSub.TextSize = 13
-
-local copyGroupBtn = Instance.new("TextButton", adminCard)
-copyGroupBtn.Size = UDim2.new(0, 200, 0, 40)
-copyGroupBtn.Position = UDim2.new(0.5, -100, 1, -50)
-copyGroupBtn.Text = "COPY GROUP LINK"
-copyGroupBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
-copyGroupBtn.BackgroundColor3 = Color3.fromRGB(255, 80, 120)
-copyGroupBtn.Font = Enum.Font.GothamBold
-local btnCorner = Instance.new("UICorner", copyGroupBtn)
-btnCorner.CornerRadius = UDim.new(0, 8)
-copyGroupBtn.MouseButton1Click:Connect(copyLink)
-
--- Unlimited indicator
-local unlimitedFrame = Instance.new("Frame")
-unlimitedFrame.Size = UDim2.new(1, -40, 0, 80)
-unlimitedFrame.Position = UDim2.new(0, 20, 0, 220)
-unlimitedFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 55)
-unlimitedFrame.Parent = adminPage
-local unfCorner = Instance.new("UICorner", unlimitedFrame)
-unfCorner.CornerRadius = UDim.new(0, 10)
-
-local checkIcon = Instance.new("TextLabel", unlimitedFrame)
-checkIcon.Size = UDim2.new(0, 40, 1, 0)
-checkIcon.Position = UDim2.new(0, 15, 0, 0)
-checkIcon.Text = "✅"
-checkIcon.TextSize = 28
-checkIcon.TextXAlignment = Enum.TextXAlignment.Left
-
-local unlimitedText = Instance.new("TextLabel", unlimitedFrame)
-unlimitedText.Size = UDim2.new(1, -70, 0, 30)
-unlimitedText.Position = UDim2.new(0, 65, 0, 15)
-unlimitedText.Text = "Permanent License Active"
-unlimitedText.TextColor3 = Color3.fromRGB(100, 255, 150)
-unlimitedText.TextSize = 16
-unlimitedText.Font = Enum.Font.GothamBold
-unlimitedText.TextXAlignment = Enum.TextXAlignment.Left
-
-local unlimitedSub = Instance.new("TextLabel", unlimitedFrame)
-unlimitedSub.Size = UDim2.new(1, -70, 0, 25)
-unlimitedSub.Position = UDim2.new(0, 65, 0, 42)
-unlimitedSub.Text = "No time limits. No restrictions."
-unlimitedSub.TextColor3 = Color3.fromRGB(180, 180, 240)
-unlimitedSub.TextSize = 13
-unlimitedSub.TextXAlignment = Enum.TextXAlignment.Left
-
-adminPage.CanvasSize = UDim2.new(0, 0, 0, 340)
-
--- ========== STARTUP ==========
-selectTab("CHEATS")
-
--- Open/Close with Right Shift
+-- Open/Close
 UserInputService.InputBegan:Connect(function(input, gameProcessed)
     if gameProcessed then return end
     if input.KeyCode == Enum.KeyCode.RightShift then
-        menuVisible = not menuVisible
-        mainFrame.Visible = menuVisible
-        if menuVisible then
+        mainFrame.Visible = not mainFrame.Visible
+        if mainFrame.Visible then
             TweenService:Create(blur, TweenInfo.new(0.3), {Size = 8}):Play()
         else
             TweenService:Create(blur, TweenInfo.new(0.3), {Size = 0}):Play()
@@ -544,24 +419,14 @@ UserInputService.InputBegan:Connect(function(input, gameProcessed)
     end
 end)
 
--- Startup Animation
-mainFrame.Visible = true
-TweenService:Create(mainFrame, TweenInfo.new(0.3), {BackgroundTransparency = 0.15}):Play()
-wait(0.5)
-mainFrame.Visible = false
+selectTab("CHEATS")
 
--- Notification
 pcall(function()
     game:GetService("StarterGui"):SetCore("SendNotification", {
         Title = "SWILL RIVALS HUB",
-        Text = "Press RIGHT SHIFT | ADMIN MODE (Unlimited)",
-        Duration = 4,
-        Icon = ""
+        Text = "Press RIGHT SHIFT | Unlimited Access",
+        Duration = 4
     })
 end)
 
-print("========================================")
-print("SWILL RIVALS HUB - ADMIN EDITION")
-print("Press RIGHT SHIFT to open menu")
-print("UNLIMITED ACCESS - No trial limits")
-print("========================================")
+print("SWILL RIVALS HUB - Press RIGHT SHIFT")
